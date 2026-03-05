@@ -40,11 +40,19 @@ You can refer to the original repository for more information on how to run the 
 For the quick version, follow these steps:
 - `cd shipment-picture-lambda-validator`
 - `mvn clean package shade:shade`
-- in the root folder `docker compose up`
-- `cd terraform` (don't forget to install `tflocal`: `pip install terraform-local`)
--  `tflocal init`
--  `flocal plan`
--  `flocal apply --auto-approve`
+- In the root folder, start LocalStack with the `LOCALSTACK_AUTH_TOKEN` pre-configured:
+
+```bash
+export LOCALSTACK_AUTH_TOKEN=<your-auth-token>
+make start
+make ready
+```
+
+- Deploy the infrastructure:
+
+```bash
+make deploy
+```
 
 Now you should have all your resources created in your LocalStack instance.
 
