@@ -27,6 +27,7 @@ To run this sample you will need:
 
 - [Maven 3.8.5](https://maven.apache.org/install.html) & [Java 17](https://www.java.com/en/download/help/download_options.html)
 - [Docker](https://docs.docker.com/get-docker/) - for running LocalStack
+- A valid [LocalStack for AWS license](https://localstack.cloud/pricing). Your license provides a [`LOCALSTACK_AUTH_TOKEN`](https://docs.localstack.cloud/getting-started/auth-token/) to activate LocalStack.
 
 
 ## Cloud Pods
