@@ -39,6 +39,9 @@ jobs:
       - name: Set up Maven
         run: sudo apt-get install -y maven
 
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Install lstk
         run: |
           npm install -g @localstack/lstk
