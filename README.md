@@ -27,7 +27,8 @@ To run this sample you will need:
 
 - [Maven 3.8.5](https://maven.apache.org/install.html) & [Java 17](https://www.java.com/en/download/help/download_options.html)
 - [Docker](https://docs.docker.com/get-docker/) - for running LocalStack
-- A valid [LocalStack for AWS license](https://localstack.cloud/pricing). Your license provides a [`LOCALSTACK_AUTH_TOKEN`](https://docs.localstack.cloud/getting-started/auth-token/) to activate LocalStack.
+- A valid [LocalStack for AWS license](https://localstack.cloud/pricing). Your license provides a [`LOCALSTACK_AUTH_TOKEN`](https://docs.localstack.cloud/aws/getting-started/auth-token/) to activate LocalStack.
+- [`lstk`](https://docs.localstack.cloud/aws/developer-tools/running-localstack/lstk/), installed via `npm install -g @localstack/lstk` or `brew install localstack/tap/lstk`. The AWS CLI is required by `lstk aws`.
 
 
 ## Cloud Pods
@@ -46,7 +47,6 @@ For the quick version, follow these steps:
 ```bash
 export LOCALSTACK_AUTH_TOKEN=<your-auth-token>
 make start
-make ready
 ```
 
 - Deploy the infrastructure:
@@ -68,13 +68,13 @@ export LOCALSTACK_AUTH_TOKEN="YOUR_AUTH_TOKEN"
 To save your remote cloud pod:
 
 ```
-localstack pod save <pod_name>
+lstk snapshot save pod:<pod_name>
 ```
 
 To save your instance’s state locally:
 
 ```
-localstack state export <my-state>
+lstk snapshot save <my-state>
 ```
 
 ## Further reading

@@ -37,11 +37,9 @@ jobs:
       - name: Set up Maven
         run: sudo apt-get install -y maven
 
-      - name: Install localstack & awslocal
+      - name: Install lstk
         run: |
-          pip install localstack
-          pip install terraform-local
-          pip install awscli-local
+          npm install -g @localstack/lstk
 
       - name: Build project
         run: |
@@ -53,22 +51,19 @@ jobs:
         run: |
           docker pull localstack/localstack:latest
           # Start LocalStack in the background
-          LS_LOG=trace localstack start -d
-          # Wait 10 seconds for the LocalStack container to become ready before timing out
-          echo "Waiting for LocalStack startup..."
-          localstack wait -t 10
-          echo "Startup complete"
+          LOCALSTACK_LS_LOG=trace lstk start
 
       - name: Run Terraform Config File
         run: |
           cd terraform
-          tflocal init
-          tflocal plan
-          tflocal apply --auto-approve
+          lstk tf init
+          lstk tf plan
+          lstk tf apply --auto-approve
 
       - name: Check for Bucket
         run: |
-          output=$(awslocal s3api list-buckets --query "Buckets[?contains(Name, 'shipment-picture-bucket')].Name" --output text)
+          lstk setup aws --non-interactive --force
+          output=$(lstk aws s3api list-buckets --query "Buckets[?contains(Name, 'shipment-picture-bucket')].Name" --output text)
           if [ -z "$output" ]; then
             echo "Created bucket not found."
             exit 1
