@@ -73,6 +73,9 @@ jobs:
           else echo "Bucket with random name was found: $output"
           fi
 
+      - name: Run tests
+        run: make test
+
       - name: Generate a Diagnostic Report
         if: failure()
         run: |

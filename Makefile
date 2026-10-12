@@ -23,4 +23,7 @@ logs:		## Save the logs in a separate file
 deploy:		## Deploy infrastructure using Terraform
 	cd terraform && lstk tf init && lstk tf apply --auto-approve
 
-.PHONY: usage install start stop logs deploy
+test:		## Upload pictures and check the validator Lambda processed them
+	./test.sh
+
+.PHONY: usage install start stop logs deploy test
